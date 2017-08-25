@@ -1,6 +1,6 @@
 # unsplash-gallery
 
-> Unslash Gallery App
+> Unsplash Gallery App
 
 ## Build Setup
 
