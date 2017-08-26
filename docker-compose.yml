@@ -12,6 +12,7 @@ services:
       HTTPS_METHOD: noredirect
     ports: 
       - "8080"
+      - "6006" #port for storybook
     volumes: 
       - .:/opt/app
     restart: unless-stopped
