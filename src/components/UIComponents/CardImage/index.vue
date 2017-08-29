@@ -1,18 +1,20 @@
 <template>
   <div class="card">
-    <card-header :user="image.user"></card-header>
-    <p class="card-text">
-      This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.
-    </p>
+    <card-header :user="image.user" :updateAt="image.updated_at"></card-header>
+    <photo :src="image.urls.regular"></photo>
+    <card-love :loves="image.likes"></card-love>
+    
   </div>
 </template>
 
 <script>
 import CardHeader from './CardHeader'
+import Photo from './Photo'
+import CardLove from './CardLove'
 
 export default {
   components: {
-    CardHeader
+    CardHeader, Photo, CardLove
   },
   props: [
     'image'

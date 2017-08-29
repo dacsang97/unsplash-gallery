@@ -15,6 +15,7 @@ import photos from '../mockup/photos.json'
 import MyButton from './MyButton.vue'
 import Welcome from './Welcome.vue'
 import CardImage from '../components/UIComponents/CardImage/index.vue'
+import CardList from '../components/UIComponents/CardList'
 
 storiesOf('Welcome', module).add('to Storybook', () => ({
   components: { Welcome },
@@ -43,12 +44,34 @@ storiesOf('Card Image', module)
       }
     },
     template: `
-      <div class="container">
+      <div class="container mt-5">
         <div class="row">
           <div class="col-md-12">
             <b-card-group columns>
-              <card-image :image="photos[0]"></card-image>
+              <card-image :image="photos[16]"></card-image>
             </b-card-group>
+          </div>
+        </div>
+        
+      </div>
+    `
+  }))
+
+storiesOf('Card List', module)
+  .add('default', () => ({
+    components: {
+      CardList
+    },
+    data () {
+      return {
+        photos: photos
+      }
+    },
+    template: `
+      <div class="container mt-5">
+        <div class="row">
+          <div class="col-md-12">
+            <card-list :images="photos"></card-list>
           </div>
         </div>
         
