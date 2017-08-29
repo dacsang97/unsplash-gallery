@@ -1,0 +1,42 @@
+<template>
+  <b-navbar toggleable="md" type="light" variant="light">
+
+    <b-nav-toggle target="nav_collapse"></b-nav-toggle>
+
+    <b-navbar-brand href="#">
+      <img :src="logo" class="navbar__logo" />
+      Unsplash Gallery
+    </b-navbar-brand>
+
+    <b-collapse is-nav id="nav_collapse">
+
+      <b-nav is-nav-bar>
+        <b-nav-item to="/">Photos</b-nav-item>
+        <b-nav-item to="/user">Authors</b-nav-item>
+      </b-nav>
+
+    </b-collapse>
+  </b-navbar>
+</template>
+
+<script>
+import Logo from '@/assets/logo-svg.svg'
+
+export default {
+  data () {
+    return {
+      logo: Logo
+    }
+  }
+}
+</script>
+
+<style lang="scss">
+.navbar__logo {
+    width: 32px;
+    top: -1px;
+    position: relative;
+    margin-right: 10px;
+}  
+</style>
+

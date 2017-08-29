@@ -1,13 +1,19 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view></router-view>
+  <div class="wrapper">
+    <navbar></navbar>
+    <app-content></app-content>
   </div>
 </template>
 
 <script>
+import Navbar from '@/components/UIComponents/Navbar'
+import AppContent from '@/components/Layouts/Content'
+
 export default {
-  name: 'app'
+  name: 'app',
+  components: {
+    Navbar, AppContent
+  }
 }
 </script>
 
