@@ -2,7 +2,9 @@
   <div class="card__header">
     <!-- <img :src="user.profile_image.small" class="rounded-circle"> -->
     <img class="d-flex mr-3 rounded-circle float-left" :src="user.profile_image.small" width="32px" height="32px">
-    <div class="card__header__username">{{user.name}}</div>
+    <div class="card__header__username">
+      <router-link :to='href'>{{user.name}}</router-link>
+    </div>
     <div class="card__header__date text-muted">{{fromNow}}</div>
   </div>
 </template>
@@ -22,8 +24,11 @@ export default {
     }
   },
   computed: {
-    fromNow() {
+    fromNow () {
       return distanceInWordsToNow(this.updateAt)
+    },
+    href () {
+      return `/@${this.user.username}`
     }
   }
 }

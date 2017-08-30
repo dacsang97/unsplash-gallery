@@ -31,7 +31,11 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+nav {
+    box-shadow: inset 0 -2px transparent;
+    border-bottom: 1px solid hsla(0,0%,54%,.3);
+}
 .navbar__logo {
     width: 32px;
     top: -1px;

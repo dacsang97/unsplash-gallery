@@ -13,7 +13,7 @@ export default new Router({
       }
     },
     {
-      path: '/user',
+      path: '/:userId',
       component: function (resolve) {
         require(['@/components/Views/Author'], resolve)
       }
