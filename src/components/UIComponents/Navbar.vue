@@ -14,7 +14,11 @@
         <b-nav-item to="/">Photos</b-nav-item>
         <b-nav-item to="/user">Authors</b-nav-item>
       </b-nav>
-
+      <b-nav is-nav-bar class="ml-auto">
+        <b-nav-item href="https://github.com/dacsang97/unsplash-gallery">
+          <i class="fa fa-github" aria-hidden="true"></i> Github
+        </b-nav-item>
+      </b-nav>
     </b-collapse>
   </b-navbar>
 </template>
