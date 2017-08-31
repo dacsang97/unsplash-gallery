@@ -2,14 +2,14 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
-        <template v-if="errors.length !== 0">
-          <h3>Something went wrong</h3>
-          <ul>
-            <li v-for="(error, index) in errors" :key="index">
+        <div v-if="errors && Object.keys(errors).length">
+          <h3>Something went wrong: {{ errors.status }}</h3>
+          <ul v-if="errors.messages && errors.messages.length">
+            <li v-for="(error, index) in errors.messages" :key="index">
               {{ error }}
             </li>
           </ul>
-        </template>
+        </div>
         <h2 v-else>
           <user-info v-if="user" :user="user"></user-info>
           <card-list :images="images"></card-list>
@@ -59,7 +59,11 @@ export default {
         }
       })
       .catch(err => {
-        this.errors = err.body.errors
+        this.errors = {}
+        this.errors.status = err.status
+        if (err.body.errors && err.body.errors.length) {
+          this.errors.messages = err.body.errors
+        }
       })
     }
   }
