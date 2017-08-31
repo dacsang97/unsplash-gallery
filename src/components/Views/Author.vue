@@ -39,7 +39,7 @@ export default {
       user: null,
       currentPage: 1,
       images: [],
-      errors: []
+      errors: null
     }
   },
   methods: {
