@@ -2,7 +2,14 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
-        <h1 v-if="error">Có gì đó sai sai</h1>
+        <template v-if="errors.length !== 0">
+          <h3>Something went wrong</h3>
+          <ul>
+            <li v-for="(error, index) in errors" :key="index">
+              {{ error }}
+            </li>
+          </ul>
+        </template>
         <h2 v-else>
           <user-info v-if="user" :user="user"></user-info>
           <card-list :images="images"></card-list>
@@ -32,7 +39,7 @@ export default {
       user: null,
       currentPage: 1,
       images: [],
-      error: 0
+      errors: []
     }
   },
   methods: {
@@ -52,8 +59,7 @@ export default {
         }
       })
       .catch(err => {
-        console.log(err)
-        this.error = 1
+        this.errors = err.body.errors
       })
     }
   }

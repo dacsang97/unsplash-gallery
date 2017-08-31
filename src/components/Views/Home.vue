@@ -2,7 +2,14 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
-        <h1 v-if="error">Có gì đó sai sai</h1>
+        <template v-if="errors.length !== 0">
+          <h3>Something went wrong</h3>
+          <ul>
+            <li v-for="(error, index) in errors" :key="index">
+              {{ error }}
+            </li>
+          </ul>
+        </template>
         <h2 v-else>
           <card-list :images="images"></card-list>
           <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" :spinner="'waveDots'">
@@ -28,7 +35,7 @@ export default {
     return {
       images: [],
       currentPage: 1,
-      error: 0
+      errors: []
     }
   },
   methods: {
@@ -45,8 +52,7 @@ export default {
         }
       })
       .catch(err => {
-        console.log(err)
-        this.error = 1
+        this.errors = err.body.errors
       })
     }
   }
