@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
-        <div v-if="errors && Object.keys(errors).length">
+        <div v-if="errors && errors.status && errors.status !== 200">
           <h3>Something went wrong: {{ errors.status }}</h3>
           <ul v-if="errors.messages && errors.messages.length">
             <li v-for="(error, index) in errors.messages" :key="index">
@@ -26,18 +26,13 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
 import CardList from '../UIComponents/CardList'
+import mixin from '@/mixin/viewMixin'
 
 export default {
   components: {
     InfiniteLoading, CardList
   },
-  data () {
-    return {
-      images: [],
-      currentPage: 1,
-      errors: null
-    }
-  },
+  mixins: [mixin],
   methods: {
     onInfinite () {
       this.$unsplash.getPhotoList(this.currentPage)
@@ -52,11 +47,7 @@ export default {
         }
       })
       .catch(err => {
-        this.errors = {}
-        this.errors.status = err.status
-        if (err.body.errors && err.body.errors.length) {
-          this.errors.messages = err.body.errors
-        }
+        this.errors = this.handleErr(err)
       })
     }
   }
