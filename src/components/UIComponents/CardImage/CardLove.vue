@@ -6,9 +6,12 @@
 
 <script>
 export default {
-  props: [
-    'loves'
-  ]
+  props: {
+    loves: {
+      type: Number,
+      required: true
+    }
+  }
 }
 </script>
 

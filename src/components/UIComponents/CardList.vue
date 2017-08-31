@@ -11,7 +11,12 @@ export default {
   components: {
     CardImage
   },
-  props: ['images']
+  props: {
+    images: {
+      type: Array,
+      required: true
+    }
+  }
 }
 </script>
 

@@ -15,9 +15,12 @@ export default {
   components: {
     CardHeader, Photo, CardLove
   },
-  props: [
-    'image'
-  ]
+  props: {
+    image: {
+      type: Object,
+      required: true
+    }
+  }
 }
 
 </script>

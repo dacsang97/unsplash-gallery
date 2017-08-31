@@ -4,8 +4,11 @@
 
 <script>
 export default {
-  props: [
-    'src'
-  ]
+  props: {
+    src: {
+      type: String,
+      required: true
+    }
+  }
 }
 </script>
