@@ -47,10 +47,6 @@ export default {
           this.images = this.images.concat(result)
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
           this.currentPage++
-          // Developement
-          // if (this.currentPage === 5) {
-          //   this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
-          // }
         } else {
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
         }

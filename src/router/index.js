@@ -3,8 +3,8 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-const Home = () => import(/* webpackChunkName: "group-route" */ '@/components/Views/Home')
-const Author = () => import(/* webpackChunkName: "group-route" */ '@/components/Views/Author')
+const Home = () => import(/* webpackChunkName: "home-route" */ '@/components/Views/Home')
+const Author = () => import(/* webpackChunkName: "author-route" */ '@/components/Views/Author')
 
 export default new Router({
   mode: 'history',
