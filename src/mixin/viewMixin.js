@@ -15,8 +15,8 @@ const mixin = {
     handleErr (err) {
       const errors = {}
       errors.status = err.status
-      if (err.body && err.body.errors && err.body.errors.length) {
-        errors.messages = err.body.errors
+      if (err.data && err.data.errors && err.data.errors.length) {
+        errors.messages = err.data.errors
       }
       return errors
     }

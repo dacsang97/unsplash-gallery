@@ -37,7 +37,7 @@ export default {
     onInfinite () {
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
-        const result = response.body
+        const result = response.data
         if (result.length) {
           this.images = this.images.concat(result)
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
@@ -47,7 +47,7 @@ export default {
         }
       })
       .catch(err => {
-        this.errors = this.handleErr(err)
+        this.errors = this.handleErr(err.response)
       })
     }
   }

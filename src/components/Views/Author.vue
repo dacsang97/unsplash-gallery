@@ -45,7 +45,7 @@ export default {
     onInfinite () {
       this.$unsplash.getUserPhotoList(this.username, this.currentPage)
       .then(response => {
-        const result = response.body
+        const result = response.data
         if (result.length) {
           if (this.currentPage === 1) {
             this.user = result[0].user
@@ -58,7 +58,7 @@ export default {
         }
       })
       .catch(err => {
-        this.errors = this.handleErr(err)
+        this.errors = this.handleErr(err.response)
       })
     }
   }

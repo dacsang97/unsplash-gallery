@@ -2,10 +2,6 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 
-// Add Vue Resource
-import VueResource from 'vue-resource'
-Vue.use(VueResource)
-
 // Add Unsplash Plugin
 import UnsplashPlugin from '@/utils/UnsplashPlugin'
 Vue.use(UnsplashPlugin)
