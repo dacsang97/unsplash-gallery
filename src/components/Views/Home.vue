@@ -42,9 +42,9 @@ export default {
           this.images = this.images.concat(result)
           this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
           this.currentPage++
-        } else {
-          this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
+          return
         }
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
       })
       .catch(err => {
         this.errors = this.handleErr(err.response)
