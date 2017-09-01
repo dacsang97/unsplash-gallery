@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row mt-4">
       <div class="col-md-12">
-        <div v-if="errors && errors.status && errors.status !== 200">
+        <div v-if="hasErrors">
           <h3>Something went wrong: {{ errors.status }}</h3>
           <ul v-if="errors.messages && errors.messages.length">
             <li v-for="(error, index) in errors.messages" :key="index">

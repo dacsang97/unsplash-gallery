@@ -6,6 +6,11 @@ const mixin = {
       errors: null
     }
   },
+  computed: {
+    hasErrors () {
+      return this.errors && this.errors.status && this.errors.status !== 200
+    }
+  },
   methods: {
     handleErr (err) {
       const errors = {}
