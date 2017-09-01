@@ -1,6 +1,6 @@
 <template>
   <b-card-group columns>
-    <card-image v-for="(image, index) in images" :image="image" :key="index"></card-image>
+    <card-image v-for="image in images" :image="image" :key="image.id"></card-image>
   </b-card-group>
 </template>
 
