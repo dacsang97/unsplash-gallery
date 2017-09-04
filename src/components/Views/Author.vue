@@ -43,14 +43,17 @@ export default {
   },
   methods: {
     onInfinite () {
+      if (this.stop) {
+        return this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
+      }
       this.$unsplash.getUserPhotoList(this.username, this.currentPage)
       .then(response => {
         const result = response.data
-        if (!result.length) {
-          return this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
-        }
+        this.link = response.headers.link
+        this.totalPage = this.getTotalPage()
         this.user = result[0].user
         this.images = this.images.concat(result)
+        this.stop = this.hasNoResult()
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
         this.updateCurrentPage()
       })

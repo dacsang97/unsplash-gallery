@@ -4,30 +4,34 @@ const mixin = {
       images: [],
       errors: null,
       link: '',
-      currentPage: 1
+      currentPage: 1,
+      totalPage: -1,
+      stop: false
     }
   },
   created () {
     this.currentPage = this.getCurrentPage()
   },
   computed: {
-    totalPage () {
-      if (!this.link) return 0
-      this.currentPage = this.updateCurrent()
-      const tmp = this.link.split(',')
-      let num = 1
-      tmp.forEach(str => {
-        let name = str.match(/(?!")\w+(?=")/g)[0]
-        if (name !== 'last') return
-        num = str.match(/(?!page=)\d+(?=&)/g)[0]
-      })
-      return num
-    },
     hasErrors () {
       return this.errors && this.errors.status && this.errors.status !== 200
     }
   },
   methods: {
+    hasNoResult () {
+      return (this.totalPage === -1 || this.currentPage === this.totalPage)
+    },
+    getTotalPage () {
+      if (!this.link) return 0
+      const tmp = this.link.split(',')
+      let num = this.totalPage
+      tmp.forEach(str => {
+        let name = str.match(/(?!")\w+(?=")/g)[0]
+        if (name !== 'last') return
+        num = str.match(/(?!page=)\d+(?=&)/g)[0]
+      })
+      return +num
+    },
     getCurrentPage () {
       const { query } = this.$route
       if (!query.page) {
