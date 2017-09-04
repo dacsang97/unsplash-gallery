@@ -8,7 +8,7 @@ const mixin = {
     }
   },
   created () {
-    this.currentPage = this.updateCurrent()
+    this.currentPage = this.getCurrentPage()
   },
   computed: {
     totalPage () {
@@ -28,15 +28,23 @@ const mixin = {
     }
   },
   methods: {
-    updateCurrent () {
+    getCurrentPage () {
       const { query } = this.$route
       if (!query.page) {
         return 1
       }
-      if (isNaN(parseInt(query.page))) {
+      if (isNaN(+query.page)) {
         return 1
       }
-      return parseInt(query.page)
+      return +query.page
+    },
+    updateCurrentPage () {
+      this.$router.push({
+        query: {
+          page: this.currentPage
+        }
+      })
+      this.currentPage ++
     },
     handleErr (err) {
       const errors = {}

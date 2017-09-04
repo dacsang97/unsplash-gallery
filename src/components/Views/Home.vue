@@ -36,9 +36,12 @@ export default {
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
         const result = response.data
-        this.link = response.headers.link
-        if (!result.length) return
-        this.images = result
+        if (!result.length) {
+          return this.$refs.infiniteLoading.$emit('$InfiniteLoading:complete')
+        }
+        this.images = this.images.concat(result)
+        this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
+        this.updateCurrentPage()
       })
       .catch(err => {
         this.errors = this.handleErr(err.response)
