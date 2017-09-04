@@ -1,7 +1,10 @@
 <template>
   <div class="row mb-5">
     <div class="col-md-12 text-center">
-      <img :src="user.profile_image.large" class="rounded-circle">
+      <img
+        v-if="profileImage && profileImage.large"
+        :src="profileImage.large" 
+        class="rounded-circle">
       <h2 class="mt-3">{{ user.name }}</h2>
       <div class="user__info">
         <span v-if="user.location" class="ml-3">
@@ -24,6 +27,11 @@ export default {
     user: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    profileImage () {
+      return this.user.profile_image
     }
   }
 }

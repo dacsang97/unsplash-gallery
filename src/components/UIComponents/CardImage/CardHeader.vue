@@ -1,7 +1,11 @@
 <template>
   <div class="card__header">
-    <!-- <img :src="user.profile_image.small" class="rounded-circle"> -->
-    <img class="d-flex mr-3 rounded-circle float-left" :src="user.profile_image.small" width="32px" height="32px">
+    <img
+      v-if="profileImage && profileImage.small"
+      class="d-flex mr-3 rounded-circle float-left" 
+      :src="profileImage.small" 
+      width="32px" height="32px"
+    >
     <div class="card__header__username">
       <router-link :to='href'>{{user.name}}</router-link>
     </div>
@@ -24,6 +28,9 @@ export default {
     }
   },
   computed: {
+    profileImage () {
+      return this.user.profile_image
+    },
     fromNow () {
       return distanceInWordsToNow(this.updateAt)
     },

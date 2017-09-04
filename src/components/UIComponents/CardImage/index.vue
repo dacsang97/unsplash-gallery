@@ -1,7 +1,7 @@
 <template>
   <div class="card">
     <card-header :user="image.user" :updateAt="image.updated_at"></card-header>
-    <photo :src="image.urls.regular"></photo>
+    <photo v-if="urls && urls.regular" :src="urls.regular"></photo>
     <card-love :loves="image.likes"></card-love>
   </div>
 </template>
@@ -19,6 +19,11 @@ export default {
     image: {
       type: Object,
       required: true
+    }
+  },
+  computed: {
+    urls () {
+      return this.image.urls
     }
   }
 }
