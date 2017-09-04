@@ -12,7 +12,11 @@
         </div>
         <div v-else>
           <card-list :images="images"></card-list>
-          <b-pagination-nav align="center" :link-gen="linkGen" :number-of-pages="totalPage" :value="currentPage" @input="handleInput" @change="handleChange" />
+          <infinite-loading :on-infinite="onInfinite" ref="infiniteLoading" :spinner="'waveDots'">
+            <span slot="no-more">
+              There is no more photos :(
+            </span>
+          </infinite-loading>
         </div>
       </div>
     </div>
@@ -20,19 +24,17 @@
 </template>
 
 <script>
+import InfiniteLoading from 'vue-infinite-loading'
 import CardList from '../UIComponents/CardList'
 import mixin from '@/mixin/viewMixin'
 
 export default {
   components: {
-    CardList
+    InfiniteLoading, CardList
   },
   mixins: [mixin],
-  mounted () {
-    this.getPhotoList()
-  },
   methods: {
-    getPhotoList () {
+    onInfinite () {
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
         const result = response.data
@@ -46,18 +48,6 @@ export default {
       .catch(err => {
         this.errors = this.handleErr(err.response)
       })
-    },
-    linkGen (pageNum) {
-      return {
-        path: '/?page=' + pageNum
-      }
-    },
-    handleInput (page) {
-      this.currentPage = page
-      this.getPhotoList()
-    },
-    handleChange (page) {
-      console.log('Change:' + page)
     }
   }
 }
