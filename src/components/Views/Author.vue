@@ -48,7 +48,13 @@ export default {
       }
       this.$unsplash.getUserPhotoList(this.username, this.currentPage)
       .then(response => {
+        if (!response.data) {
+          return
+        }
         const result = response.data
+        if (!response.headers.link) {
+          return
+        }
         this.link = response.headers.link
         this.totalPage = this.getTotalPage()
         this.user = result[0].user

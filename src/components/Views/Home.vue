@@ -40,7 +40,13 @@ export default {
       }
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
+        if (!response.data) {
+          return
+        }
         const result = response.data
+        if (!response.headers.link) {
+          return
+        }
         this.link = response.headers.link
         this.totalPage = this.getTotalPage()
         this.images = this.images.concat(result)
