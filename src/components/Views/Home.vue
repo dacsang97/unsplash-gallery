@@ -40,14 +40,11 @@ export default {
       }
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
-        if (!response.data) {
+        if (!this.getProp(response, 'data') || !this.getProp(response, 'headers.link')) {
           return
         }
-        const result = response.data
-        if (!response.headers.link) {
-          return
-        }
-        this.link = response.headers.link
+        const result = this.getProp(response, 'data')
+        this.link = this.getProp(response, 'headers.link')
         this.totalPage = this.getTotalPage()
         this.images = this.images.concat(result)
         this.stop = this.hasNoResult()
@@ -55,8 +52,7 @@ export default {
         this.updateCurrentPage()
       })
       .catch(err => {
-        console.log(err)
-        this.errors = this.handleErr(err.response)
+        this.errors = this.handleErr(this.getProp(err, 'response'))
       })
     }
   }

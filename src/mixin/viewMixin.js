@@ -1,3 +1,5 @@
+import get from 'lodash.get'
+
 const mixin = {
   data () {
     return {
@@ -57,6 +59,9 @@ const mixin = {
         errors.messages = err.data.errors
       }
       return errors
+    },
+    getProp (object, path, defaultValue) {
+      return get(object, path, defaultValue)
     }
   }
 }
