@@ -21,18 +21,12 @@ const mixin = {
   },
   methods: {
     hasNoResult () {
-      return (this.totalPage === -1 || this.currentPage === this.totalPage)
+      return (this.totalPage === -1 || this.currentPage >= this.totalPage)
     },
-    getTotalPage () {
-      if (!this.link) return 0
-      const tmp = this.link.split(',')
-      let num = this.totalPage
-      tmp.forEach(str => {
-        let name = str.match(/(?!")\w+(?=")/g)[0]
-        if (name !== 'last') return
-        num = str.match(/(?!page=)\d+(?=&)/g)[0]
-      })
-      return +num
+    getTotalPage (headers) {
+      const perPage = this.getProp(headers, 'x-per-page')
+      const totalPage = this.getProp(headers, 'x-total')
+      return Math.ceil(totalPage / perPage)
     },
     getCurrentPage () {
       const { query } = this.$route

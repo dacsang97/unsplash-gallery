@@ -40,12 +40,11 @@ export default {
       }
       this.$unsplash.getPhotoList(this.currentPage)
       .then(response => {
-        if (!this.getProp(response, 'data') || !this.getProp(response, 'headers.link')) {
+        if (!this.getProp(response, 'data')) {
           return
         }
         const result = this.getProp(response, 'data')
-        this.link = this.getProp(response, 'headers.link')
-        this.totalPage = this.getTotalPage()
+        this.totalPage = this.getTotalPage(this.getProp(response, 'headers'))
         this.images = this.images.concat(result)
         this.stop = this.hasNoResult()
         this.$refs.infiniteLoading.$emit('$InfiniteLoading:loaded')
